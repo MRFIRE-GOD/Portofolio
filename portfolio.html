@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomas Tesfayohans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#0f0f0f;
+  --bg3:#141414;
+  --border:#1e1e1e;
+  --border2:#2a2a2a;
+  --text:#e8e8e8;
+  --muted:#444;
+  --muted2:#333;
+  --accent:#7c6af7;
+  --accent2:#a78bfa;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;min-height:100vh}
+
+/* ── Nav ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,10,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2.5rem;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-brand{font-size:.95rem;font-weight:600;letter-spacing:-.3px;color:#fff}
+.nav-brand span{color:var(--accent)}
+.nav-links{display:flex;gap:1.75rem}
+.nav-links a{font-size:.8rem;color:var(--muted);text-decoration:none;transition:color .15s;letter-spacing:.3px;text-transform:uppercase}
+.nav-links a:hover{color:var(--text)}
+
+/* ── Hero ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:6rem 2rem 4rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(124,106,247,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(124,106,247,.08);border:1px solid rgba(124,106,247,.2);
+  border-radius:99px;padding:5px 14px;
+  font-size:.72rem;color:var(--accent2);letter-spacing:.5px;text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.hero-tag::before{content:'●';color:var(--accent);font-size:.5rem}
+h1{font-size:clamp(2.5rem,8vw,5rem);font-weight:700;letter-spacing:-2px;line-height:1;margin-bottom:1.25rem;color:#fff}
+h1 span{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:clamp(.95rem,2.5vw,1.15rem);color:var(--muted);max-width:480px;margin:0 auto 2rem;font-weight:300}
+.hero-sub strong{color:var(--text);font-weight:500}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn-primary{
+  background:var(--accent);color:#fff;border:none;
+  border-radius:8px;padding:12px 24px;font-size:.85rem;font-weight:600;
+  cursor:pointer;font-family:inherit;text-decoration:none;
+  transition:background .15s;
+}
+.btn-primary:hover{background:#6a58e8}
+.btn-ghost{
+  background:transparent;color:var(--muted);
+  border:1px solid var(--border2);border-radius:8px;
+  padding:12px 24px;font-size:.85rem;font-weight:500;
+  cursor:pointer;font-family:inherit;text-decoration:none;
+  transition:all .15s;
+}
+.btn-ghost:hover{border-color:#444;color:var(--text)}
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  font-size:.7rem;color:var(--muted2);letter-spacing:.5px;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+.scroll-hint::after{content:'↓';animation:bounce 1.5s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+
+/* ── Sections ── */
+section{padding:5rem 2rem;max-width:900px;margin:0 auto}
+.section-label{
+  font-size:.68rem;color:var(--accent);text-transform:uppercase;
+  letter-spacing:.8px;margin-bottom:.6rem;font-weight:500;
+}
+.section-title{font-size:clamp(1.4rem,4vw,2rem);font-weight:700;letter-spacing:-.5px;color:#fff;margin-bottom:1rem}
+.section-line{width:40px;height:2px;background:var(--accent);border-radius:2px;margin-bottom:2.5rem}
+
+/* ── About ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.about-card{background:var(--bg2);padding:1.75rem}
+.about-card h3{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.75rem}
+.about-card p{font-size:.9rem;color:#aaa;line-height:1.7}
+.about-card.full{grid-column:1/-1}
+.interest-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:.25rem}
+.interest{
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:6px;padding:5px 12px;font-size:.75rem;color:#888;
+}
+
+/* ── Skills ── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.skill-card{background:var(--bg2);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:12px}
+.skill-icon{font-size:1.4rem;line-height:1}
+.skill-info{display:flex;flex-direction:column;gap:2px}
+.skill-name{font-size:.85rem;font-weight:500;color:var(--text)}
+.skill-level{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+
+/* ── Projects ── */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.project-card{
+  background:var(--bg2);padding:1.5rem;
+  display:flex;flex-direction:column;gap:10px;
+  text-decoration:none;color:inherit;
+  transition:background .12s;position:relative;
+}
+.project-card:hover{background:var(--bg3)}
+.project-emoji{font-size:1.8rem;line-height:1}
+.project-title{font-size:.95rem;font-weight:600;color:#fff}
+.project-desc{font-size:.8rem;color:var(--muted);line-height:1.5;flex:1}
+.project-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem}
+.project-tag{font-size:.62rem;font-weight:500;padding:3px 8px;border-radius:4px;background:rgba(124,106,247,.1);color:var(--accent2);border:1px solid rgba(124,106,247,.2)}
+.project-arrow{color:var(--muted2);font-size:.8rem;transition:color .15s}
+.project-card:hover .project-arrow{color:var(--accent)}
+.coming-card{background:var(--bg);border:1px dashed var(--border2);border-radius:0;padding:1.5rem;display:flex;flex-direction:column;gap:8px}
+.coming-card .project-emoji{opacity:.25;filter:grayscale(1)}
+.coming-card .project-title{color:var(--muted2)}
+.coming-card .project-desc{color:var(--muted2)}
+.coming-badge{font-size:.62rem;background:var(--bg3);color:var(--muted2);border:1px solid var(--border);border-radius:4px;padding:2px 8px;display:inline-block;width:fit-content;text-transform:uppercase;letter-spacing:.3px}
+
+/* ── Contact ── */
+.contact-box{
+  background:var(--bg2);border:1px solid var(--border);border-radius:12px;
+  padding:2.5rem;display:flex;flex-direction:column;align-items:center;
+  text-align:center;gap:1.25rem;
+}
+.contact-box p{font-size:.9rem;color:var(--muted);max-width:420px;line-height:1.7}
+.contact-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.contact-link{
+  display:flex;align-items:center;gap:8px;
+  background:var(--bg3);border:1px solid var(--border2);
+  border-radius:8px;padding:10px 18px;
+  font-size:.82rem;color:#888;text-decoration:none;
+  transition:all .15s;font-weight:500;
+}
+.contact-link:hover{border-color:#444;color:var(--text)}
+.contact-link .icon{font-size:1rem}
+
+/* ── Footer ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem;text-align:center;
+  font-size:.72rem;color:var(--muted2);
+}
+footer span{color:var(--accent)}
+
+/* ── Divider ── */
+.full-divider{border:none;border-top:1px solid var(--border);margin:0}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  nav{padding:0 1.25rem}
+  .nav-links{gap:1rem}
+  .about-grid{grid-template-columns:1fr}
+  .about-card.full{grid-column:1}
+  section{padding:3.5rem 1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-brand">T<span>.</span>Tesfayohans</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-tag">Available for opportunities</div>
+  <h1>Thomas<br><span>Tesfayohans</span></h1>
+  <p class="hero-sub">
+    <strong>Data Engineering student @ USN</strong> — developer, explorer,<br>and builder of things in my free time.
+  </p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary">See my work</a>
+    <a href="#contact" class="btn-ghost">Get in touch</a>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</div>
+
+<hr class="full-divider">
+
+<!-- About -->
+<section id="about">
+  <div class="section-label">Who I am</div>
+  <div class="section-title">About me</div>
+  <div class="section-line"></div>
+  <div class="about-grid">
+    <div class="about-card full">
+      <h3>Bio</h3>
+      <p>
+        I'm Thomas, a Data Engineering student at USN (University of South-Eastern Norway).
+        Outside of lectures I spend my time coding, building projects, and constantly
+        trying new things — whether that's a new framework, a new sport, or a new idea.
+        I'm the kind of person who dives in first and figures it out along the way.
+      </p>
+    </div>
+    <div class="about-card">
+      <h3>Interests & Hobbies</h3>
+      <div class="interest-list">
+        <span class="interest">💻 Coding</span>
+        <span class="interest">🌐 Networking</span>
+        <span class="interest">💪 Working out</span>
+        <span class="interest">🏊 Swimming</span>
+        <span class="interest">⚽ Football</span>
+        <span class="interest">🔍 Trying new things</span>
+      </div>
+    </div>
+    <div class="about-card">
+      <h3>Currently</h3>
+      <p style="color:#888;font-size:.85rem;line-height:1.8">
+        📚 Studying Data Engineering @ USN<br>
+        🛠️ Building side projects<br>
+        🚀 Always exploring something new
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- Skills -->
+<section id="skills">
+  <div class="section-label">What I work with</div>
+  <div class="section-title">Skills</div>
+  <div class="section-line"></div>
+  <div class="skills-grid">
+    <div class="skill-card"><span class="skill-icon">🐍</span><div class="skill-info"><span class="skill-name">Python</span><span class="skill-level">Learning</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🗄️</span><div class="skill-info"><span class="skill-name">SQL</span><span class="skill-level">Learning</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🌐</span><div class="skill-info"><span class="skill-name">HTML & CSS</span><span class="skill-level">Comfortable</span></div></div>
+    <div class="skill-card"><span class="skill-icon">📊</span><div class="skill-info"><span class="skill-name">Data Engineering</span><span class="skill-level">Studying</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🔗</span><div class="skill-info"><span class="skill-name">Networking</span><span class="skill-level">Interested</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🧠</span><div class="skill-info"><span class="skill-name">Problem Solving</span><span class="skill-level">Always</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🛠️</span><div class="skill-info"><span class="skill-name">Building things</span><span class="skill-level">Passionate</span></div></div>
+    <div class="skill-card"><span class="skill-icon">🔍</span><div class="skill-info"><span class="skill-name">Exploring</span><span class="skill-level">Constantly</span></div></div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- Projects -->
+<section id="projects">
+  <div class="section-label">Things I've built</div>
+  <div class="section-title">Projects</div>
+  <div class="section-line"></div>
+  <div class="projects-grid">
+
+    <a class="project-card" href="https://mrtrasharcade.netlify.app" target="_blank">
+      <div class="project-emoji">🕹️</div>
+      <div class="project-title">MrTrash Arcade</div>
+      <div class="project-desc">My personal browser arcade with 17+ games — Snake, Tetris, Blackjack, Wordle, and more. Built game by game.</div>
+      <div class="project-footer">
+        <span class="project-tag">Live site</span>
+        <span class="project-arrow">↗</span>
+      </div>
+    </a>
+
+    <div class="coming-card">
+      <div class="project-emoji">🔧</div>
+      <div class="project-title">Next project</div>
+      <div class="project-desc">Always building something new. Check back soon.</div>
+      <span class="coming-badge">Coming soon</span>
+    </div>
+
+    <div class="coming-card">
+      <div class="project-emoji">💡</div>
+      <div class="project-title">More to come</div>
+      <div class="project-desc">This section grows as I build. Stay tuned.</div>
+      <span class="coming-badge">Coming soon</span>
+    </div>
+
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- Contact -->
+<section id="contact">
+  <div class="section-label">Let's talk</div>
+  <div class="section-title">Contact</div>
+  <div class="section-line"></div>
+  <div class="contact-box">
+    <p>
+      I'm always open to interesting conversations, collaborations, or just a chat.
+      Whether it's about tech, data, gaming, or something completely new — feel free to reach out.
+    </p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:ttesfayohans22@gmail.com">
+        <span class="icon">✉️</span> ttesfayohans22@gmail.com
+      </a>
+      <a class="contact-link" href="https://mrtrasharcade.netlify.app" target="_blank">
+        <span class="icon">🕹️</span> My Arcade
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built by <span>Thomas Tesfayohans</span> · Data Engineering Student · Explorer</p>
+</footer>
+
+</body>
+</html>
