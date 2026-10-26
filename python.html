@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python fra null – IB1020</title>
+<meta name="description" content="Leksjoner, øvelser og feilliste for IB1020 Programmering for beregning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<style>
+:root{
+  --bg:#0e1116; --panel:#161b22; --panel2:#1c232d; --line:#2a323d;
+  --text:#e6edf3; --muted:#8b97a5; --accent:#ffd43b; --blue:#4b8bbe;
+  --ok:#3fb950; --todo:#f0883e; --err:#ff6b6b;
+  --r:12px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,sans-serif}
+code,pre{font-family:"JetBrains Mono",monospace}
+a{color:var(--accent)}
+.wrap{display:grid;grid-template-columns:250px 1fr;max-width:1200px;margin:0 auto}
+nav{position:sticky;top:0;height:100vh;overflow:auto;padding:28px 18px;border-right:1px solid var(--line)}
+nav .logo{font-weight:800;font-size:1.1rem;margin-bottom:4px}
+nav .logo span{color:var(--accent)}
+nav .sub{color:var(--muted);font-size:.85rem;margin-bottom:22px}
+nav a{display:flex;justify-content:space-between;gap:8px;color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:8px;font-size:.92rem}
+nav a:hover,nav a.active{background:var(--panel);color:var(--text)}
+nav .grp{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:18px 10px 6px}
+main{padding:40px 48px 120px;min-width:0}
+header.hero{background:linear-gradient(135deg,#1f2a38,#16202b);border:1px solid var(--line);border-radius:18px;padding:32px;margin-bottom:40px}
+.hero h1{margin:0 0 6px;font-size:2rem;line-height:1.2}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{margin:0;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.stat{background:rgba(0,0,0,.25);border:1px solid var(--line);border-radius:10px;padding:10px 16px}
+.stat b{display:block;font-size:1.4rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.stat small{color:var(--muted)}
+.method{margin-top:22px;padding:14px 16px;border-left:3px solid var(--accent);background:rgba(255,212,59,.06);border-radius:0 8px 8px 0}
+.plan{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.plan span{font-size:.82rem;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.plan span.done{border-color:var(--ok);color:var(--ok)}
+.plan span.now{border-color:var(--todo);color:var(--todo)}
+section{scroll-margin-top:20px;margin-bottom:56px}
+section>h2{font-size:1.5rem;margin:0 0 16px;display:flex;align-items:center;gap:12px}
+.num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--blue);color:#fff;font-size:1rem}
+ul.notes{padding-left:20px;margin:0 0 18px}
+ul.notes li{margin:4px 0}
+:not(pre)>code{background:var(--panel2);border:1px solid var(--line);padding:1px 6px;border-radius:5px;font-size:.88em;color:#ffe08a}
+.rule{background:var(--panel);border:1px solid var(--accent);border-radius:var(--r);padding:14px 18px;margin:16px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:16px 0}
+.card h3{margin:0 0 8px;font-size:1.08rem;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.tag{font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px}
+.tag.ok{background:rgba(63,185,80,.15);color:var(--ok)}
+.tag.todo{background:rgba(240,136,62,.15);color:var(--todo)}
+.card p{margin:6px 0}
+details{margin-top:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}
+summary{cursor:pointer;padding:10px 14px;font-weight:500;color:var(--muted);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸ ";color:var(--accent)}
+details[open] summary::before{content:"▾ "}
+details>div{padding:0 14px 12px}
+.code{position:relative;margin:12px 0}
+.code pre{margin:0!important;border-radius:10px!important;border:1px solid var(--line);font-size:.88rem!important;background:#11161d!important}
+.copy{position:absolute;top:8px;right:8px;background:var(--panel2);color:var(--muted);border:1px solid var(--line);border-radius:6px;font:12px Inter;padding:4px 8px;cursor:pointer}
+.copy:hover{color:var(--text)}
+.check{font-family:"JetBrains Mono",monospace;font-size:.88rem;background:#11161d;border:1px dashed var(--line);border-radius:8px;padding:10px 14px}
+ol.errors{counter-reset:e;list-style:none;padding:0}
+ol.errors li{counter-increment:e;position:relative;padding:12px 14px 12px 52px;margin:8px 0;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+ol.errors li::before{content:counter(e);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:7px;background:rgba(255,107,107,.15);color:var(--err);display:grid;place-items:center;font-weight:600;font-size:.85rem}
+.menu-btn{display:none}
+footer{color:var(--muted);font-size:.85rem;border-top:1px solid var(--line);padding-top:20px}
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr}
+  nav{position:fixed;inset:0 30% 0 0;z-index:10;background:var(--bg);transform:translateX(-100%);transition:.2s}
+  nav.open{transform:none}
+  .menu-btn{display:block;position:fixed;right:16px;bottom:16px;z-index:11;background:var(--accent);color:#111;border:0;border-radius:999px;padding:12px 18px;font-weight:600}
+  main{padding:24px 16px 100px}
+  header.hero{padding:22px}
+  .hero h1{font-size:1.5rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav id="nav">
+  <div class="logo">Python <span>fra null</span></div>
+  <div class="sub">IB1020 Programmering for beregning</div>
+  <a href="#start">Oversikt</a>
+  <div class="grp">Leksjoner</div>
+  <a href="#l1">1 · Variabler og print <span>✅</span></a>
+  <a href="#l2">2 · Regning <span>✅</span></a>
+  <a href="#l3">3 · if (valg) <span>✅</span></a>
+  <a href="#l4">4 · for-løkker <span>✅</span></a>
+  <a href="#l5">5 · Funksjoner <span>⏳</span></a>
+  <div class="grp">Mer</div>
+  <a href="#vaer">Værstatistikk <span>⏳</span></a>
+  <a href="#feil">Feil jeg har gjort <span>12</span></a>
+  <a href="#neste">Neste leksjoner</a>
+</nav>
+<button class="menu-btn" id="menuBtn">Meny</button>
+
+<main>
+<header class="hero" id="start">
+  <h1>Python fra null – <em>IB1020</em></h1>
+  <p>Leksjoner, øvelser og feilene mine, samlet før eksamen.</p>
+  <div class="stats">
+    <div class="stat"><b id="days">–</b><small>dager til eksamen</small></div>
+    <div class="stat"><b>18.11</b><small>kl. 13:00 · 3 timer</small></div>
+    <div class="stat"><b>6 / 7</b><small>øvelser ferdig</small></div>
+  </div>
+  <div class="method">
+    <strong>Eksamen:</strong> WISEflow FLOWlock, ingen hjelpemidler, og du kan <strong>ikke kjøre koden</strong>.<br>
+    <strong>Metode:</strong> skriv oppgaven på norsk først (som kommentar), og oversett så linje for linje til Python.
+  </div>
+  <div class="plan">
+    <span class="done">1 variabler/print</span><span class="done">2 regning</span><span class="done">3 if</span><span class="done">4 for-løkker</span><span class="now">5 funksjoner</span><span>6 lister/arrays</span><span>7 while</span><span>8 tilfeldige tall</span><span>9 plotting</span>
+  </div>
+</header>
+
+<!-- L1 -->
+<section id="l1">
+  <h2><span class="num">1</span>Variabler og print</h2>
+  <ul class="notes">
+    <li><code>print("Hei")</code> viser noe på skjermen. Tekst står i anførselstegn.</li>
+    <li>En variabel er en boks med navn. <code>=</code> betyr «legg verdien til høyre i boksen til venstre».</li>
+    <li>En boks kan få nytt innhold: <code>poeng = 10</code>, så <code>poeng = 15</code> → 15.</li>
+    <li>Tekst + variabler: <code>print("Jeg er", alder, "år")</code> (komma gir mellomrom automatisk).</li>
+    <li>f-streng: <code>print(f"Det er {dager_igjen} dager igjen til {fag}-eksamen")</code></li>
+  </ul>
+  <div class="card">
+    <h3>Øvelse 1 <span class="tag ok">Ferdig</span></h3>
+    <p>Lag variablene <code>fag</code> og <code>dager_igjen</code>, og skriv ut en setning med dem.</p>
+    <details><summary>Min løsning</summary><div>
+<div class="code"><pre><code class="language-python">fag = "Python"
+dager_igjen = 24
+print(f"Det er {dager_igjen} dager igjen til {fag}-eksamen")</code></pre></div>
+    </div></details>
+  </div>
+</section>
+
+<!-- L2 -->
+<section id="l2">
+  <h2><span class="num">2</span>Regning</h2>
+  <ul class="notes">
+    <li><code>+ - * /</code> og <code>**</code> (opphøyd). Vanlig regnerekkefølge – bruk parenteser.</li>
+    <li><code>(a + b) / 2</code> er <strong>ikke</strong> det samme som <code>a + b / 2</code>.</li>
+    <li><code>import numpy as np</code> øverst for <code>np.pi</code> og <code>np.sqrt()</code>.</li>
+  </ul>
+  <div class="card">
+    <h3>Øvelse 2: Trapes <span class="tag ok">Ferdig</span></h3>
+    <p>Regn ut arealet A = h(a+b)/2 med a = 5, b = 3, h = 7.</p>
+    <div class="check">Forventet: 28.0</div>
+    <details><summary>Min løsning</summary><div>
+<div class="code"><pre><code class="language-python">a = 5
+b = 3
+h = 7
+A = h*(a+b)/2
+print(f"Arealet av trapeset er {A}")</code></pre></div>
+    </div></details>
+  </div>
+</section>
+
+<!-- L3 -->
+<section id="l3">
+  <h2><span class="num">3</span>if (valg)</h2>
+  <ul class="notes">
+    <li><code>if betingelse:</code> – kolon, og innrykk (4 mellomrom) på det som hører til.</li>
+    <li><code>elif</code> = ellers hvis, <code>else</code> = ellers. Python stopper ved første som er sann.</li>
+    <li><code>&lt; &gt; &lt;= &gt;= == !=</code>. <code>=</code> legger i boks, <code>==</code> spør om noe er likt.</li>
+    <li><code>and</code> = begge sanne, <code>or</code> = minst én sann.</li>
+  </ul>
+  <div class="card">
+    <h3>Øvelse 3: Prosentvis endring <span class="tag ok">Ferdig</span></h3>
+    <p>p = 100·(d−c)/c. Gi feilmelding hvis <code>c == 0</code>.</p>
+    <details><summary>Min løsning</summary><div>
+<div class="code"><pre><code class="language-python">c = 200
+d = 250
+if c == 0:
+    print("Feil: kan ikke dele på null")
+else:
+    p = 100*(d-c)/c
+    print(f"Endringen er {p} prosent.")</code></pre></div>
+    </div></details>
+  </div>
+</section>
+
+<!-- L4 -->
+<section id="l4">
+  <h2><span class="num">4</span>for-løkker</h2>
+  <ul class="notes">
+    <li><code>for temp in temps:</code> – <code>temp</code> får ett og ett element.</li>
+    <li><code>range(start, stopp, steg)</code>. Stopp er <strong>ikke</strong> med → skriv siste tall + 1.
+      <ul>
+        <li><code>range(7, 40, 2)</code> → 7, 9, …, 39</li>
+        <li><code>range(20, 61, 5)</code> → 20, 25, …, 60</li>
+        <li><code>range(10, 0, -2)</code> → 10, 8, 6, 4, 2</li>
+        <li>Steg 1 er standard: <code>range(1, 11)</code> = 1…10</li>
+      </ul></li>
+    <li>Hver runde legger Python neste tall i variabelen og kjører koden under. Regning inni løkka bruker verdiene som ligger i boksene akkurat nå.</li>
+    <li>Iterasjonsnummer: <code>nr = 1</code> før løkka, <code>nr = nr + 1</code> inni.</li>
+    <li>Oppsamling: <code>total = 0</code> før løkka, <code>total = total + temp</code> inni.</li>
+  </ul>
+  <div class="rule"><strong>Regelen:</strong> det som står fast → <em>før</em> løkka. Det som endrer seg → variabelen i <em>for-linja</em>. Regningen → <em>inni</em> løkka.</div>
+
+  <div class="card">
+    <h3>Oppvarming: Pant <span class="tag ok">Skrevet selv</span></h3>
+    <p>Små flasker (2 kr) fast på 8, store flasker (3 kr) fra 1 til 10.</p>
+    <details><summary>Min løsning</summary><div>
+<div class="code"><pre><code class="language-python">sma = 8
+for store in range(1, 11):
+    pant = sma * 2 + store * 3
+    print(f"{store} store flasker gir {pant} kr")</code></pre></div>
+    </div></details>
+  </div>
+  <div class="card">
+    <h3>Øvelse 4: Pant med steg <span class="tag ok">Ferdig</span></h3>
+    <p>Små flasker fast på 12 (2 kr), store 5, 7, …, 23 (3 kr).</p>
+    <details><summary>Løsning</summary><div>
+<div class="code"><pre><code class="language-python">sma = 12
+for stor in range(5, 24, 2):
+    pant = sma * 2 + stor * 3
+    print(f"{stor} store flasker gir {pant} kr")</code></pre></div>
+    <p><strong>Variant:</strong> store fast på 10, små 20, 25, …, 60 → <code>stor = 10</code> og <code>for sma in range(20, 61, 5):</code></p>
+    </div></details>
+  </div>
+</section>
+
+<!-- L5 -->
+<section id="l5">
+  <h2><span class="num">5</span>Funksjoner</h2>
+  <ul class="notes">
+    <li><code>def navn(inn-argumenter):</code> … <code>return svar</code>. Funksjonen er en maskin: tall inn → regner → svar ut.</li>
+    <li>Funksjonen gjør ingenting før du kaller den: <code>resultat = dobbel(5)</code>.</li>
+    <li>Argumentene fordeles etter plass: <code>trapes(5, 3, 7)</code> → a=5, b=3, h=7.</li>
+    <li><code>return</code> bytter ut kallet med svaret: <code>print(trapes(5, 3, 7))</code> → <code>print(28.0)</code>.</li>
+    <li>Variabler inni funksjonen (som <code>a</code>) finnes ikke utenfor.</li>
+  </ul>
+  <p><strong>Funksjon i løkke</strong> – eksempelet å se på når du står fast:</p>
+<div class="code"><pre><code class="language-python">def trapes(a, b, h):
+    return h * (a + b) / 2
+
+for b in range(3, 13):
+    print(trapes(5, b, 7))</code></pre></div>
+
+  <div class="card">
+    <h3>Øvelse 5: panteautomat <span class="tag ok">Ferdig</span></h3>
+    <p>Eksamen 2021, oppgave 1a. Lag <code>panteautomat(a, b)</code> og kall den med 12 og 5.</p>
+    <div class="check">Forventet: 39</div>
+    <details><summary>Min løsning</summary><div>
+<div class="code"><pre><code class="language-python">def panteautomat(a, b):
+    return a * 2 + b * 3
+
+resultat = panteautomat(12, 5)
+print(resultat)</code></pre></div>
+    <p>Husk: bruk akkurat navnet oppgaven gir (<code>panteautomat</code>, ikke <code>pantautomat</code>), og legg en tom linje etter funksjonen.</p>
+    </div></details>
+  </div>
+
+  <div class="card">
+    <h3>Øvelse 6: Funksjon + løkke <span class="tag todo">Gjenstår</span></h3>
+    <p>Eksamen 2021, oppgave 1b. Bruk <code>panteautomat</code> i ei for-løkke: små flasker fast på 12, store 5, 7, …, 23. Kall funksjonen for hver verdi og skriv ut svaret.</p>
+    <div class="check">Første svar: 39 · Siste svar: 93</div>
+    <details><summary>Hint 1 – hva står fast?</summary><div><p>Små flasker = 12. Lag en variabel for det <em>før</em> løkka, akkurat som <code>sma = 8</code> i oppvarmingen.</p></div></details>
+    <details><summary>Hint 2 – hva endrer seg?</summary><div><p>De store flaskene, så de skal i for-linja. Det er nøyaktig samme range som i øvelse 4.</p></div></details>
+    <details><summary>Hint 3 – hva skjer inni løkka?</summary><div><p>Kall <code>panteautomat(?, ?)</code> og bytt ut <code>?</code> med <em>navnene på variablene</em>, ikke faste tall: først variabelen for små flasker, så variabelen fra for-linja. De to linjene med <code>resultat = …</code> trengs ikke.</p></div></details>
+    <details><summary>Hvorfor forrige forsøk ikke virket</summary><div><p><code>range(12, 3)</code> starter på 12 og skal stoppe før 3 – da blir det null runder. Og <code>a</code> finnes bare inni funksjonen, så <code>panteautomat(a, 3)</code> utenfor ville krasjet.</p></div></details>
+  </div>
+</section>
+
+<!-- Vaer -->
+<section id="vaer">
+  <h2><span class="num" style="background:var(--todo)">☁</span>Værstatistikk</h2>
+  <div class="card">
+    <h3>weather_stats(temps) <span class="tag todo">Gjenstår</span></h3>
+    <p><code>temps = [3.5, -2.0, 0.5, -4.5, 1.0, 6.0, -1.5]</code></p>
+    <p>Returner gjennomsnitt, laveste, høyeste og antall dager under 0. <strong>Ikke lov:</strong> <code>sum</code>, <code>min</code>, <code>max</code>, <code>len</code>, <code>statistics</code>. Bonus: hvilken dag (1–7) var kaldest?</p>
+    <div class="check">Fasit: laveste −4.5 · høyeste 6.0 · 3 dager under 0 · snitt ≈ 0.43 · kaldeste dag 4</div>
+    <p style="margin-top:12px"><strong>Ferdig:</strong> laveste/høyeste med if, og summen med <code>total = total + temp</code> (gir 3.0).<br>
+    <strong>Mangler:</strong> antall, snitt, dager under 0 – og alt i én løkke.</p>
+    <details><summary>Hint – antall uten len()</summary><div><p>Lag en teller før løkka og legg til 1 hver runde (se feil nr. 6 – det er akkurat det den gjør).</p></div></details>
+    <details><summary>Hint – dager under 0</summary><div><p>En egen teller som bare øker inni en <code>if</code> som sjekker om temperaturen er under 0.</p></div></details>
+    <details><summary>Hint – kaldeste dag</summary><div><p>Hold styr på dagnummeret med <code>nr</code> (leksjon 4). Når du finner en ny laveste, lagre også <code>nr</code>.</p></div></details>
+  </div>
+</section>
+
+<!-- Feil -->
+<section id="feil">
+  <h2><span class="num" style="background:var(--err)">!</span>Feil jeg har gjort</h2>
+  <p style="color:var(--muted)">Les gjennom denne lista rett før eksamen.</p>
+  <ol class="errors">
+    <li>Overskrev <code>temps = [...]</code> inne i funksjonen → lista skal stå utenfor og sendes inn.</li>
+    <li>Brukte <code>statistics.mean</code>, <code>min</code>, <code>max</code> når det ikke var lov.</li>
+    <li>Glemte <code>return</code> og å kalle funksjonen.</li>
+    <li><code>for total in temps:</code> → løkkevariabelen blir overskrevet hver runde. Bruk <code>for temp in temps:</code> og en egen <code>total</code>.</li>
+    <li><code>total = temp</code> gir bare siste tall (−1.5). Riktig: <code>total = total + temp</code>.</li>
+    <li><code>total = total + 1</code> teller antall (7), ikke sum.</li>
+    <li>Delte pant-oppgaven i to løkker og lot den faste verdien (<code>sma</code>) øke med +1. Det som står fast skal ikke endres.</li>
+    <li>Glemte selve utregningen inni løkka (telte bare variabler opp).</li>
+    <li>Brukte tall fra eksempel-utskriften i koden (<code>range(1, 20, 20)</code>, <code>store * 19</code>). Bruk formelen og tallrekka fra oppgaven.</li>
+    <li><code>range(12, 3)</code> → start større enn stopp gir ingen runder.</li>
+    <li>Brukte <code>a</code> utenfor funksjonen – den finnes bare inni.</li>
+    <li>Små ting: <code>wather</code> → <code>weather</code>, <code>pantautomat</code> → bruk navnet oppgaven gir, <code>{pant}kr</code> → <code>{pant} kr</code>.</li>
+  </ol>
+</section>
+
+<section id="neste">
+  <h2><span class="num" style="background:var(--line)">→</span>Neste leksjoner</h2>
+  <div class="plan">
+    <span>6 · Lister og arrays</span><span>7 · while-løkker</span><span>8 · Tilfeldige tall (Monte Carlo)</span><span>9 · Plotting</span>
+  </div>
+</section>
+
+<footer>Sist oppdatert 26.10.2026 · IB1020, USN</footer>
+</main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script>
+// Nedtelling
+(function(){
+  const exam = new Date("2026-11-18T13:00:00+01:00");
+  const d = Math.ceil((exam - new Date()) / 86400000);
+  document.getElementById("days").textContent = d > 0 ? d : "0";
+})();
+// Kopier-knapper
+document.querySelectorAll(".code").forEach(box=>{
+  const b=document.createElement("button");b.className="copy";b.textContent="Kopier";
+  b.onclick=()=>{navigator.clipboard.writeText(box.querySelector("code").innerText).then(()=>{b.textContent="Kopiert!";setTimeout(()=>b.textContent="Kopier",1200)})};
+  box.appendChild(b);
+});
+// Mobilmeny
+const nav=document.getElementById("nav");
+document.getElementById("menuBtn").onclick=()=>nav.classList.toggle("open");
+nav.querySelectorAll("a").forEach(a=>a.onclick=()=>nav.classList.remove("open"));
+// Aktiv lenke
+const links=[...nav.querySelectorAll("a")];
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle("active",l.getAttribute("href")==="#"+e.target.id))}}),{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section,header.hero").forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
